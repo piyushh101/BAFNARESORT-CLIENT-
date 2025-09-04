@@ -1,39 +1,119 @@
-/* --- Layout shell --- */
+/* ---------- Page wrapper ---------- */
 .about-page {
-  padding: clamp(32px, 4vw, 60px) 20px;
+  background: #fff; /* keep hero full-bleed; no outer padding here */
+}
+
+/* ---------- HERO (full-bleed night banner, lively caption) ---------- */
+.about-hero {
+  position: relative;
+  min-height: 65vh;
+  /* SHOW BUILDING ON DESKTOP */
+  background-position: center bottom; /* was: center top */
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+}
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.45) 40%,
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+.about-hero-overlay {
+  position: relative; /* above overlay */
+  text-align: center;
+  color: #fff;
+  padding: 24px;
+}
+
+/* Title animation + underline sweep */
+.about-hero-overlay h1 {
+  margin: 0 0 6px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: clamp(30px, 4vw + 1rem, 64px);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.6);
+  animation: heroFadeUp 0.8s cubic-bezier(0.2, 0.65, 0.2, 1) both;
+}
+.about-hero-overlay h1::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 0%;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.5), #fff);
+  border-radius: 999px;
+  animation: heroUnderline 1.4s 0.2s cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+}
+
+/* Subtitle animation */
+.about-hero-overlay p {
+  margin: 8px 0 0;
+  font-size: clamp(14px, 1.1vw + 0.6rem, 22px);
+  opacity: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  animation: heroFadeUp 0.8s 0.15s cubic-bezier(0.2, 0.65, 0.2, 1) both;
+}
+
+/* Keyframes */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroUnderline {
+  from { width: 0%; opacity: 0.4; }
+  to { width: 160px; opacity: 1; }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .about-hero-overlay h1,
+  .about-hero-overlay p,
+  .about-hero-overlay h1::after {
+    animation: none !important;
+  }
+}
+
+/* ---------- Content container ---------- */
+.about-content {
   max-width: 1200px;
   margin: 0 auto;
+  padding: clamp(32px, 4vw, 64px) 20px;
 }
 
-/* --- Typography --- */
-.about-title {
-  text-align: center;
-  font-size: clamp(24px, 2.5vw + 1rem, 36px);
-  margin-bottom: clamp(24px, 4vw, 40px);
-  color: #333;
-}
-
+/* ---------- Typography ---------- */
 .about-text h2 {
-  font-size: clamp(20px, 1.4vw + 1rem, 28px);
+  font-size: clamp(22px, 1.6vw + 1rem, 32px);
   margin-bottom: 12px;
+  color: #222;
 }
-
 .about-text h3 {
   font-size: clamp(16px, 1vw + 0.8rem, 20px);
-  margin-top: 18px;
-  margin-bottom: 10px;
+  margin: 18px 0 10px;
   color: #444;
 }
-
 .about-text p,
 .about-text ul {
   color: #555;
-  line-height: 1.7;
+  line-height: 1.75;
   font-size: clamp(14px, 0.6vw + 0.8rem, 16px);
   margin-bottom: 14px;
 }
 
-/* --- Grids --- */
+/* Softer, premium emphasis (instead of heavy <b>) */
+.about-text b,
+.about-text strong {
+  font-weight: 600;
+  color: #222; /* or switch to brand gold: #d4af37 */
+}
+
+/* ---------- Grid layout ---------- */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -41,57 +121,104 @@
   align-items: start;
 }
 
+/* ---------- Image grid with premium hover ---------- */
 .about-images {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
 
-/* --- Images --- */
-.about-images img {
+.image-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0b0b0b;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.45s cubic-bezier(0.2, 0.65, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0.65, 0.2, 1);
+  cursor: pointer;
+}
+.image-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;   /* keeps shape across breakpoints */
-  object-fit: cover;
-  border-radius: 12px;
+  height: 100%;
   display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 0.6s cubic-bezier(0.2, 0.65, 0.2, 1), filter 0.6s;
 }
 
-/* --- Medium screens (≤ 1024px) --- */
+/* glossy shine sweep */
+.image-card::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    120deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 55%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.2, 0.65, 0.2, 1);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Hover: lift + zoom + shine */
+.image-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+}
+.image-card:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.02);
+}
+.image-card:hover::after {
+  transform: translateX(120%);
+}
+
+/* Keyboard focus */
+.image-card:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
-  .about-grid {
-    grid-template-columns: 1fr; /* stack text over images */
-  }
-  .about-images {
-    grid-template-columns: repeat(3, 1fr); /* tighter, still grid-y */
-    gap: 12px;
+  .about-grid { grid-template-columns: 1fr; }
+  .about-images { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  /* nudge image composition for tablets */
+  .about-hero {
+    background-position: center 70%;
+    min-height: 60vh;
   }
 }
 
-/* --- Tablets / large phones (≤ 768px) --- */
 @media (max-width: 768px) {
-  .about-page {
-    padding: 32px 16px;
+  .about-content { padding: 32px 16px; }
+  .about-images { grid-template-columns: 1fr 1fr; }
+
+  /* lift caption on mobile + show more building */
+  .about-hero {
+    min-height: 58vh;
+    background-position: center 65%;
   }
-  .about-images {
-    grid-template-columns: 1fr 1fr; /* 2-up */
+  .about-hero-overlay {
+    transform: translateY(-6vh);
   }
 }
 
-/* --- Small phones (≤ 480px) --- */
 @media (max-width: 480px) {
-  .about-title {
-    margin-bottom: 20px;
-  }
-  .about-images {
-    grid-template-columns: 1fr; /* 1-up for max readability */
-    gap: 10px;
-  }
-  .about-text ul {
-    margin-left: 16px;
-  }
-}
+  .about-images { grid-template-columns: 1fr; gap: 10px; }
+  .about-text ul { margin-left: 16px; }
 
-/* Optional: nicer list bullets on mobile */
-.about-text ul li {
-  padding-left: 2px;
+  .about-hero {
+    min-height: 56vh;
+    background-position: center 60%;
+  }
+  .about-hero-overlay {
+    transform: translateY(-8vh);
+  }
 }
