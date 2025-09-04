@@ -94,17 +94,7 @@
   filter: brightness(0.95);
 }
 
-@media (max-width: 768px) {
-  .book-now-li {
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
-  }
-  .book-btn {
-    display: inline-block;
-    margin-left: 0;
-  }
-}
+
 
 /* ================= HAMBURGER ================= */
 .menu-icon {
@@ -217,3 +207,14 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+@media (max-width: 768px) {
+  .book-btn{
+     width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .book-btn {
+    display: inline-block;
+    margin-left: 0;
+  }
+  }

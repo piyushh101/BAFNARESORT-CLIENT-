@@ -105,16 +105,8 @@ function Navbar() {
           </li>
 
           {/* 🔐 Login Button (replaces Book Now) */}
-          <li className="book-now-li">
-            <button
-              className="book-btn"
-              onClick={() => {
-                closeMenu();
-                navigate("/login");
-              }}
-            >
-              Login
-            </button>
+          <li className="book-btn">
+           <NavLink to="/contact" onClick={closeMenu}><butto>Book</butto></NavLink>
           </li>
         </ul>
       </nav>

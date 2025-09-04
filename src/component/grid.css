@@ -1,0 +1,123 @@
+.about-section {
+  padding: 40px 20px;
+  background: #fff;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Left Text */
+.about-text {
+  flex: 1;
+  min-width: 320px;
+}
+
+.about-text h5 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color:#8d8d8d     ;       /* same grey as OUR SERVICES */
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.about-text h2 {
+  font-size: 2.2rem;
+
+  margin-bottom: 15px;
+  color: #222; /* black */
+}
+
+.about-text h2 span {
+  color:#222; /* keep "Bafna Resort" black */
+}
+
+.about-typewriter {
+  font-size: 1.1rem;
+  color: rgb(168, 218, 32); /* typewriter text golden */
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.about-typewriter span {
+  color: goldenrod;
+  font-weight: bold;
+}
+
+/* Right Image Grid */
+.about-images-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  min-width: 320px;
+  align-items: stretch;
+}
+
+.left-stack img,
+.right-vertical img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+/* Hover zoom */
+.left-stack img:hover,
+.right-vertical img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix equal height layout */
+.about-images-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  align-items: stretch;
+}
+
+.left-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 15px;
+}
+
+.right-vertical img {
+  height: 100%; /* match stacked left */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-images-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .left-stack {
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .right-vertical img {
+    height: 100%; /* still equal height */
+  }
+}
+@media (max-width: 768px) {
+  .about-text {
+    text-align: left;
+    padding-top: 18px;
+  }
+}

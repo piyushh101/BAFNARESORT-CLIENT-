@@ -7,6 +7,7 @@
   import BookingBar from "./component/BookingBar";
   import About from "./component/About";
   import Service from "./component/Service";
+  import Grid from "./component/Grid.jsx";
   import RoomCarousel from "./component/RoomCarsoul";
   import Footer from "./component/Footer";
   import Rooms from "./component/Room";
@@ -30,7 +31,7 @@
       <div>
         <HeroSlider />
         <BookingBar />
-        <About />
+        <Grid />
         <Service />
         <RoomCarousel />
         <Suspense fallback={<Loader />}>

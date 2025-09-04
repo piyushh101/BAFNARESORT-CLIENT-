@@ -105,7 +105,7 @@ export default function BookingBar() {
       {showPopup && (
         <div className="popup-overlay" onClick={() => setShowPopup(false)}>
           <div className="popup-box" onClick={(e) => e.stopPropagation()}>
-            <h2>⚠️ Server Problem</h2>
+            <h2>⚠️Opps Server Problem</h2>
             <p>
               We are currently facing issues with our booking server.  
               Please call us directly at <strong>+91 994077 26406</strong> to confirm your booking.
